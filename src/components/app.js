@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import moment from "moment";
-import axios from "axios";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import NavigationContainer from "./navigation-container/navigation-container";
@@ -12,22 +11,6 @@ import PortfolioDetail from "./portfolio/portfolio-detail";
 import NoMatch from "./pages/no-match";
 
 export default class App extends Component {
-  constructor() {
-    super();
-
-    this.getPortfolioItems = this.getPortfolioItems.bind(this);
-  }
-
-  getPortfolioItems() {
-    axios
-      .get("https://jordan.devcamp.space/portfolio/portfolio_items")
-      .then(response => {
-        console.log("response data", response);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
   render() {
     this.getPortfolioItems();
     return (
