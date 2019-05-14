@@ -12,7 +12,6 @@ import NoMatch from "./pages/no-match";
 
 export default class App extends Component {
   render() {
-    this.getPortfolioItems();
     return (
       <div className="app">
         <Router>
