@@ -16,7 +16,6 @@
       position: absolute;
       top: 0;
       display: flex;
-      flex-direction: column;
       align-items: center;
       height: 100%;
       text-align: center;
@@ -37,4 +36,9 @@
       margin-bottom: 20px;
     }
   }
+}
+
+.image-blur {
+  transition: 1s;
+  filter: brightness(10%);
 }
