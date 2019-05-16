@@ -2,9 +2,11 @@
   display: flex;
   justify-content: space-between;
   padding: 30px;
+  
   .left-side {
     display: flex;
   }
+
   .nav-link-wrapper {
     height: 22px;
     border-bottom: 1px solid transparent;
@@ -20,9 +22,11 @@
         color: black;
       }
     }
+    
     &:hover {
       border-bottom: 1px solid black;
     }
+
     .nav-link-active {
       border-bottom: 1px solid black;
       color: black;
