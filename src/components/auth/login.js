@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from 'axios';
 
 export default class Login extends Component {
   constructor(props) {
@@ -6,7 +7,8 @@ export default class Login extends Component {
 
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      errorText: ""
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -15,19 +17,45 @@ export default class Login extends Component {
 
   handleChange(event) {
     this.setState({
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
+      errorText: ""
     });
   }
 
   handleSubmit(event) {
-    console.log("Handle submit", event);
+    axios.post(
+      "https://api.devcamp.space/sessions",
+    {
+      client: {
+        email:this.state.email,
+        password: this.state.password
+        }
+      },
+      { withCredentials : true }
+    )
+    .then(response => {
+      if (response.data.state === 'created') {
+        console.log("You can come in...")
+      } else {
+        this.setState({
+          errorText:"Wrong email or password"
+        })
+      }
+    })
+    .catch(error =>{
+      this.setState({
+        errorText: "An error has occurred"
+      });
+    });
+
+    event.preventDefault()
   }
 
   render() {
     return (
       <div>
         <h1>LOGIN TO ACCESS YOUR DASHBOARD</h1>
-
+        <div>{this.state.errorText}</div>
         <form onSubmit={this.handleSubmit}>
           <input
             type="email"
