@@ -1,46 +1,46 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import axios from 'axios';
 
-import PortfolioSidebarList from "../portfolio/portfolio-sidebar-list"
+import PortfolioSidebarList from '../portfolio/portfolio-sidebar-list';
 
 export default class PortfolioManager extends Component {
-  constructor() {
-    super();
+  constructor () {
+    super ();
 
     this.state = {
-      portfolioItems: []
+      portfolioItems: [],
     };
   }
 
-  getPortfolioItems() {
+  getPortfolioItems () {
     axios
-      .get("https://jacobbatterman.devcamp.space/portfolio/portfolio_items", {
-        withCredentials: true
+      .get ('https://jacobbatterman.devcamp.space/portfolio/portfolio_items', {
+        withCredentials: true,
       })
-      .then(response  => {
-        this.setState({
-          portfolioItems: [...response.data.portfolio_items]
+      .then (response => {
+        this.setState ({
+          portfolioItems: [...response.data.portfolio_items],
         });
       })
-      .catch(error => {
-        console.log ("error in getPortfolioItems", error);
-      })
+      .catch (error => {
+        console.log ('error in getPortfolioItems', error);
+      });
   }
 
-    componentDidMount() {
-      this.getPortfolioItems();
-    }
-  render() {
+  componentDidMount () {
+    this.getPortfolioItems ();
+  }
+  render () {
     return (
-    <div className="portfolio-manager-wrapper">
-      <div className="left-column">
-        <h1>PortfolioManager</h1>
-      </div>
+      <div className="portfolio-manager-wrapper">
+        <div className="left-column">
+          <h1>PortfolioManager</h1>
+        </div>
 
-      <div className="right-column">
-        <PortfolioSidebarList data={this.state.portfolioItems} />
+        <div className="right-column">
+          <PortfolioSidebarList data={this.state.portfolioItems} />
+        </div>
       </div>
-    </div>
     );
   }
 }
