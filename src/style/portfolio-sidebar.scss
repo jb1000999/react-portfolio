@@ -2,8 +2,12 @@
   .portfolio-item-thumb {
     padding: 21px;
 
-    .portfolio-thumb-img {
+    .portfolio-thumb-img img {
       width: 100%;
+
+      .title {
+        color: $offwhite;
+      }
     }
   }
 }
