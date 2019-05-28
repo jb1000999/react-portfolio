@@ -60,7 +60,7 @@ export default class PortfolioForm extends Component {
         position: position || '',
         url: url || '',
         editMode: true,
-        apiUrl: `https://jacobbatterman.devcamp.space/portfolio/portfolio_items?order_by=created_at&direction=desc`,
+        apiUrl: `https://jacobbatterman.devcamp.space/portfolio/portfolio_items?order_by=created_at&direction=desc${id}`,
         apiAction: 'patch',
       });
     }
