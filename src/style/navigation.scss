@@ -2,7 +2,20 @@
   display: flex;
   justify-content: space-between;
   padding: 30px;
-  
+
+  .right-side {
+    a {
+      margin-left: 15px;
+      cursor: pointer;
+      color: $teal;
+      transition: 0.5s ease-in-out;
+
+      &:hover {
+        color: $dark-teal;
+      }
+    }
+  }
+
   .left-side {
     display: flex;
   }
@@ -18,11 +31,12 @@
     a {
       color: $grey;
       text-decoration: none;
+
       &:hover {
         color: black;
       }
     }
-    
+
     &:hover {
       border-bottom: 1px solid black;
     }
@@ -30,6 +44,6 @@
     .nav-link-active {
       border-bottom: 1px solid black;
       color: black;
-      }
     }
   }
+}
