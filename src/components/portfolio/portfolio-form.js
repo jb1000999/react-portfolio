@@ -18,6 +18,9 @@ export default class PortfolioForm extends Component {
       thumb_image: '',
       banner_image: '',
       logo: '',
+      editMode: false,
+      apiUrl: 'https://jacobbatterman.devcamp.space/portfolio/portfolio_items?order_by=created_at&direction=desc',
+      apiAction: 'post',
     };
 
     this.handleChange = this.handleChange.bind (this);
@@ -31,6 +34,36 @@ export default class PortfolioForm extends Component {
     this.thumbRef = React.createRef ();
     this.bannerRef = React.createRef ();
     this.logoRef = React.createRef ();
+  }
+
+  componentDidUpdate () {
+    if (Object.keys (this.props.portfolioToEdit).length > 0) {
+      const {
+        id,
+        name,
+        description,
+        category,
+        position,
+        url,
+        thumb_image_url,
+        banner_image_url,
+        logo_url,
+      } = this.props.portfolioToEdit;
+
+      this.props.clearPortfolioToEdit ();
+
+      this.setState ({
+        id: id,
+        name: name || '',
+        description: description || '',
+        category: category || 'eCommerce',
+        position: position || '',
+        url: url || '',
+        editMode: true,
+        apiUrl: `https://jacobbatterman.devcamp.space/portfolio/portfolio_items?order_by=created_at&direction=desc`,
+        apiAction: 'patch',
+      });
+    }
   }
 
   handleThumbDrop () {
@@ -97,16 +130,18 @@ export default class PortfolioForm extends Component {
   }
 
   handleSubmit (event) {
-    axios
-      .post (
-        'https://jacobbatterman.devcamp.space/portfolio/portfolio_items',
-        this.buildForm (),
-        {withCredentials: true}
-      )
+    axios ({
+      method: this.state.apiAction,
+      url: this.state.apiUrl,
+      data: this.buildForm (),
+      withCredentials: true,
+    })
       .then (response => {
-        this.props.handleSuccessfulFormSubmission (
-          response.data.portfolio_item
-        );
+        if (this.state.editMode) {
+          this.props.handleEditFormSubmission ();
+        } else {
+          this.props.handleNewFormSubmission (response.data.portfolio_item);
+        }
 
         this.setState ({
           name: '',
@@ -117,6 +152,9 @@ export default class PortfolioForm extends Component {
           thumb_image: '',
           banner_image: '',
           logo: '',
+          editMode: false,
+          apiUrl: 'https://jacobbatterman.devcamp.space/portfolio/portfolio_items?order_by=created_at&direction=desc',
+          apiAction: 'post',
         });
 
         [this.thumbRef, this.bannerRef, this.logoRef].forEach (ref => {
@@ -191,6 +229,7 @@ export default class PortfolioForm extends Component {
           >
             <div className="dz-message">Thumbnail</div>
           </DropzoneComponent>
+
           <DropzoneComponent
             ref={this.bannerRef}
             config={this.componentConfig ()}
@@ -211,7 +250,9 @@ export default class PortfolioForm extends Component {
         </div>
 
         <div>
-          <button className="btn" type="submit">Save</button>
+          <button className="btn" type="submit">
+            Save
+          </button>
         </div>
       </form>
     );
