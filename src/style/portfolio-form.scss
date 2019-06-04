@@ -28,6 +28,11 @@
           font-weight: 900;
           color: $warning;
           cursor: pointer;
+          transition: 0.5s ease-in-out;
+
+          &:hover {
+            color: #ff0101;
+          }
         }
       }
     }
