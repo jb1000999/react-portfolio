@@ -62,6 +62,9 @@ export default class PortfolioForm extends Component {
         editMode: true,
         apiUrl: `https://jacobbatterman.devcamp.space/portfolio/portfolio_items?order_by=created_at&direction=desc${id}`,
         apiAction: 'patch',
+        thumb_image: thumb_image_url || '',
+        banner_image: banner_image_url || '',
+        logo: logo_url || '',
       });
     }
   }
@@ -221,32 +224,44 @@ export default class PortfolioForm extends Component {
         </div>
 
         <div className="image-uploaders">
-          <DropzoneComponent
-            ref={this.thumbRef}
-            config={this.componentConfig ()}
-            djsConfig={this.djsConfig ()}
-            eventHandlers={this.handleThumbDrop ()}
-          >
-            <div className="dz-message">Thumbnail</div>
-          </DropzoneComponent>
+          {this.state.thumb_image && this.state.editMode
+            ? <div className="portfolio-manager-image-wrapper">
+                <img src={this.state.thumb_image} />
+              </div>
+            : <DropzoneComponent
+                ref={this.thumbRef}
+                config={this.componentConfig ()}
+                djsConfig={this.djsConfig ()}
+                eventHandlers={this.handleThumbDrop ()}
+              >
+                <div className="dz-message">Thumbnail</div>
+              </DropzoneComponent>}
 
-          <DropzoneComponent
-            ref={this.bannerRef}
-            config={this.componentConfig ()}
-            djsConfig={this.djsConfig ()}
-            eventHandlers={this.handleBannerDrop ()}
-          >
-            <div className="dz-message">Banner</div>
-          </DropzoneComponent>
+          {this.state.banner_image && this.state.editMode
+            ? <div className="portfolio-manager-image-wrapper">
+                <img src={this.state.banner_image} />
+              </div>
+            : <DropzoneComponent
+                ref={this.bannerRef}
+                config={this.componentConfig ()}
+                djsConfig={this.djsConfig ()}
+                eventHandlers={this.handleBannerDrop ()}
+              >
+                <div className="dz-message">Banner</div>
+              </DropzoneComponent>}
 
-          <DropzoneComponent
-            ref={this.logoRef}
-            config={this.componentConfig ()}
-            djsConfig={this.djsConfig ()}
-            eventHandlers={this.handleLogoDrop ()}
-          >
-            <div className="dz-message">Logo</div>
-          </DropzoneComponent>
+          {this.state.logo && this.state.editMode
+            ? <div className="portfolio-manager-image-wrapper">
+                <img src={this.state.logo} />
+              </div>
+            : <DropzoneComponent
+                ref={this.logoRef}
+                config={this.componentConfig ()}
+                djsConfig={this.djsConfig ()}
+                eventHandlers={this.handleLogoDrop ()}
+              >
+                <div className="dz-message">Logo</div>
+              </DropzoneComponent>}
         </div>
 
         <div>

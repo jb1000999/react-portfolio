@@ -3,7 +3,6 @@
   grid-template-columns: 1fr;
   padding: 42px;
 
-
   @include input-element();
 
   input {
@@ -14,5 +13,13 @@
     @include base-grid;
     grid-template-columns: 200px 200px 200px;
 
+    .portfolio-manager-image-wrapper {
+      img {
+        width: 100%;
+        height: 120px;
+        object-fit: cover;
+        border-radius: 5px;
+      }
+    }
   }
 }
