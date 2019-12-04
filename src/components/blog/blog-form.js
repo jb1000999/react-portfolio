@@ -1,52 +1,52 @@
-import React, {Component} from 'react';
-import axios from 'axios';
+import React, { Component } from "react";
+import axios from "axios";
 
 export default class BlogForm extends Component {
-  constructor (props) {
-    super (props);
+  constructor(props) {
+    super(props);
 
     this.state = {
-      title: '',
-      blog_status: '',
+      title: "",
+      blog_status: ""
     };
 
-    this.handleChange = this.handleChange.bind (this);
-    this.handleSubmit = this.handleSubmit.bind (this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  buildForm () {
-    let formData = new FormData ();
+  buildForm() {
+    let formData = new FormData();
 
-    formData.append ('portfolio_blog[title]', this.state.title);
-    formData.append ('portfolio_blog[blog_status]', this.state.blog_status);
+    formData.append("portfolio_blog[title]", this.state.title);
+    formData.append("portfolio_blog[blog_status]", this.state.blog_status);
 
     return formData;
   }
 
-  handleSubmit (event) {
+  handleSubmit(event) {
     axios
-      .post (
-        'https://jacobbatterman.devcamp.space/portfolio/portfolio_blogs',
-        this.buildForm (),
-        {withCredentials: true}
+      .post(
+        "https://jacobbatterman.devcamp.space/portfolio/portfolio_blogs",
+        this.buildForm(),
+        { withCredentials: true }
       )
-      .then (response => {
-        this.props.handleSuccessfullFormSubmission (response.data);
+      .then(response => {
+        this.props.handleSuccessfullFormSubmission(response.data);
       })
-      .catch (error => {
-        console.log ('handleSubmit for blog error', error);
+      .catch(error => {
+        console.log("handleSubmit for blog error", error);
       });
 
-    event.preventDefault ();
+    event.preventDefault();
   }
 
-  handleChange (event) {
-    this.setState ({
-      [event.target.name]: event.target.value,
+  handleChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value
     });
   }
 
-  render () {
+  render() {
     return (
       <form onSubmit={this.handleSubmit}>
         <input
