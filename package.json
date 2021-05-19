@@ -37,7 +37,7 @@
     "@fortawesome/react-fontawesome": "^0.1.4",
     "ajv": "^5.5.2",
     "autoprefixer": "^9.1.0",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^7.2.3",
